@@ -1,0 +1,241 @@
+
+* {
+  margin: 0; /* Tar bort alla standardmarginaler webbläsaren sätter */
+  padding: 0; /* Tar bort all standardpadding webbläsaren sätter */
+  box-sizing: border-box; /* Gör så att padding och border räknas in i elementets storlek */
+  font-family: Inter, Arial, sans-serif; /* Standardtypsnitt för hela sidan */
+}
+
+:root {
+  --bg-dark: #2c0b0b; /* Mörk bakgrundsfärg för sidan */
+  --bg-card: #3a0d0d; /* Bakgrundsfärg för korten */
+  --text-light: #ffdede; /* Ljus textfärg för texter i modal */
+  --shadow: rgba(0, 0, 0, 0.65); /* Färg för skuggor */
+}
+
+/* HELA SIDANS LAYOUT */
+body {
+  display: flex; /* Gör sidan till flexbox för att lätt kunna placera saker vertikalt */
+  flex-direction: column; /* Placera innehållet uppifrån och ner */
+  min-height: 100vh; /* Minsta höjd = hela skärmen */
+  padding: 20px; /* Litet avstånd inuti sidan */
+  background: var(--bg-dark); /* Sätter bakgrundsfärgen */
+  color: #fff; /* Standard textfärg */
+}
+
+main {
+  flex: 1; /* Tar upp all plats som blir kvar under header */
+}
+
+/* SIDHUVUD */
+header h1 {
+  text-align: center; /* Centrerar rubriken */
+  margin-bottom: 20px; /* Litet avstånd under rubriken */
+}
+
+/* SÖKSEKTION */
+.search-section {
+  display: flex; /* Flexbox för input och knapp */
+  justify-content: center; /* Centrerar horisontellt */
+  gap: 14px; /* Avstånd mellan sökfält och knapp */
+  margin-bottom: 35px; /* Avstånd under söksektionen */
+}
+
+#searchInput {
+  padding: 14px 18px; /* Inre marginal i sökfältet */
+  width: 300px; /* Bredd på sökfältet */
+  border-radius: 12px; /* Rundade hörn */
+  border: none; /* Tar bort kantlinje */
+  font-size: 1rem; /* Textstorlek */
+}
+
+#searchBtn {
+  padding: 14px 24px; /* Inre marginal i knappen */
+  background: #fff; /* Bakgrundsfärg */
+  color: #000; /* Textfärg */
+  border: none; /* Ingen kantlinje */
+  border-radius: 12px; /* Rundade hörn */
+  cursor: pointer; /* Visar att knappen går att klicka */
+  font-weight: bold; /* Fet text */
+  font-size: 1rem; /* Textstorlek */
+  transition: 0.2s; /* Liten animation vid hover */
+}
+
+#searchBtn:hover:enabled {
+  background: #e6dcdc; /* Ljusare bakgrund när man hovrar */
+  transform: scale(1.05); /* Liten zoom-effekt */
+}
+
+#searchBtn:disabled {
+  background: #666; /* Grå bakgrund när knappen inte går att klicka */
+  cursor: not-allowed; /* Visar att knappen inte fungerar */
+}
+
+/* FILMRUTNÄT */
+.movie-grid {
+  display: grid; /* Rutnäts-layout för korten */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  /* Gör kolumner som fyller utrymmet och är minst 180px breda */
+  gap: 22px; /* Avstånd mellan kort */
+}
+
+.movie-card {
+  background: var(--bg-card); /* Kortets bakgrundsfärg */
+  border-radius: 14px; /* Rundade hörn */
+  overflow: hidden; /* Döljer det som sticker utanför kortet */
+  text-align: center; /* Centrerar text */
+  cursor: pointer; /* Visar att kortet går att klicka */
+  transition: transform 0.22s, box-shadow 0.22s; /* Smidig animation vid hover */
+  border: 1px solid #4b1a1a; /* Liten kantlinje runt kortet */
+}
+
+.movie-card:hover {
+  transform: scale(1.06); /* Kortet zoomar lite vid hover */
+  box-shadow: 0 12px 25px var(--shadow); /* Lägger till skugga */
+}
+
+.movie-card img {
+  width: 100%; /* Bilden fyller hela kortet */
+  border-bottom: 1px solid #4b1a1a; /* Kantlinje under bilden */
+}
+
+/* KORTINNEHÅLL */
+.card-body {
+  padding: 12px; /* Litet avstånd inuti kortet */
+  display: flex; /* Flexbox */
+  flex-direction: column; /* Innehållet vertikalt */
+  align-items: center; /* Centrerar innehållet */
+}
+
+.movie-title {
+  font-size: 1rem; /* Textstorlek för titel */
+  margin-bottom: 6px; /* Avstånd under titel */
+  text-align: center; /* Centrerar text */
+}
+
+.movie-year {
+  font-size: 0.85rem; /* Mindre textstorlek för årtal */
+  color: #bbb; /* Ljusgrå text */
+  margin-bottom: 6px; /* Avstånd under årtal */
+  text-align: center; /* Centrerar text */
+}
+
+.rating-badge {
+  background: linear-gradient(135deg, #7c1b1b, #882929, #7c1b1b); /* Gradient för betyg */
+  background-size: 200% 200%; /* För animationen */
+  color: #ffffff; /* Textfärg */
+  padding: 3px 10px; /* Litet avstånd runt text */
+  font-size: 0.9rem; /* Textstorlek */
+  font-weight: 700; /* Fet text */
+  border-radius: 8px; /* Rundade hörn */
+  white-space: nowrap; /* Texten håller sig på en rad */
+  text-align: center; /* Centrerar text */
+  animation: shine 2.5s linear infinite; /* Blinkande effekt */
+}
+
+@keyframes shine {
+  0% { background-position: 200% 0; } /* Startpunkt för gradient-animation */
+  100% { background-position: -200% 0; } /* Slutpunkt för gradient-animation */
+}
+
+/* LADDNINGSSKELETT */
+.skeleton {
+  height: 260px; /* Höjd på skelett */
+  background: linear-gradient(90deg, #2f0c0c 25%, #4a1515 50%, #2f0c0c 75%); /* Shimmer-effekt */
+  background-size: 200% 100%; /* Större bakgrund för animation */
+  animation: shimmer 1.5s infinite; /* Rörlig effekt */
+  border-radius: 14px; /* Rundade hörn */
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* MODAL (POPUP-RUTA) */
+.modal-bg {
+  position: fixed; /* Täcker hela skärmen */
+  inset: 0; /* Alla kanter */
+  background: rgba(15, 0, 0, 0.9); /* Semi-transparent bakgrund */
+  backdrop-filter: blur(6px); /* Suddig bakgrund bakom modal */
+  display: flex; /* Flexbox-layout */
+  justify-content: center; /* Centrerar horisontellt */
+  align-items: center; /* Centrerar vertikalt */
+  z-index: 2000; /* Visas ovanpå allt annat */
+  animation: fadeIn 0.25s ease; /* Fade-in animation */
+}
+
+.modal {
+  background: linear-gradient(145deg, #3f0d0d, #2b0909); /* Gradient-bakgrund */
+  color: #fff; /* Textfärg */
+  max-width: 600px; /* Maximal bredd */
+  width: 90%; /* Bredd på modal */
+  padding: 28px; /* Inre marginal */
+  border-radius: 18px; /* Rundade hörn */
+  box-shadow: 0 10px 40px var(--shadow); /* Skugga */
+  display: grid; /* Grid-layout */
+  grid-template-columns: 160px 1fr; /* Bild + text */
+  gap: 20px; /* Avstånd mellan kolumner */
+}
+
+.modal img {
+  width: 160px; /* Bildbredd */
+  border-radius: 10px; /* Rundade hörn */
+}
+
+.close-btn {
+  width: 100%; /* Tar hela bredden */
+  padding: 16px 20px; /* Inre marginal */
+  border-radius: 12px; /* Rundade hörn */
+  border: none; /* Ingen kantlinje */
+  background: #ffffff; /* Bakgrundsfärg */
+  color: #000000; /* Textfärg */
+  cursor: pointer; /* Klickbar */
+  font-size: 1.1rem; /* Textstorlek */
+  font-weight: bold; /* Fet stil */
+  text-align: center; /* Centrerar text */
+  transition: 0.2s; /* Mjuk animation */
+  margin-top: 20px; /* Avstånd ovanför */
+}
+
+.close-btn:hover {
+  background: #e6dcdc; /* Ljusare vid hover */
+  transform: scale(1.05); /* Zoom-effekt */
+  box-shadow: 0 12px 25px var(--shadow); /* Skugga */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); } /* Start */
+  to { opacity: 1; transform: scale(1); } /* Slut */
+}
+
+/* SIDFOT */
+footer {
+  text-align: center; /* Centrerar text */
+  font-size: 0.85rem; /* Textstorlek */
+  opacity: 0.6; /* Lite genomskinlig */
+  margin-top: 20px; /* Avstånd ovanför */
+}
+
+/* RESPONSIV DESIGN */
+@media (max-width: 540px) {
+  .modal {
+    grid-template-columns: 1fr; /* Enkelkolumn på små skärmar */
+    text-align: center; /* Centrerar text */
+  }
+
+  .modal img {
+    margin: 0 auto; /* Centrerar bilden popup-rutan som visas när man klickar på ett filmkort.) */
+  }
+}
+/* SNÖCANVAS LÄNGST NER */
+#snowCanvas {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px; /* Höjd på området där snön faller */
+  pointer-events: none; /* Klick går igenom */
+  z-index: 999; /* Över innehåll men under modals */
+  background: transparent; /* Ingen vit kant, bara genomskinligt */
+}
