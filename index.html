@@ -6,24 +6,39 @@
   <title>Movie Browser</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="snow-page">
+
+<!--
+  SNÖCANVAS:
+  Ett canvas-element som används för animerad snö över hela sidan.
+  Visas endast på första sidan och döljs när filmförslag ges för en bätte ux upplevelse.
+-->
+<canvas id="snowCanvas"></canvas>
 
 <header>
-  <h1>🎬 Movie Browser</h1>       <!-- Rubriken jag lagt till för att visa sidans namn -->
-  <div class="search-section">    <!-- Söksektion där användaren kan söka efter filmer eller serier -->
+  <!-- SIDHUVUD MED RUBRIK OCH SÖKFUNKTION -->
+  <h1>🎬 Movie Browser</h1>
+  <div class="search-section">
     <div class="input-wrap">
-      <input type="text" id="searchInput" placeholder="Search for movies or series..." autofocus>   <!-- Textfält för användarens sökning; autofocus gör att markören är aktiv direkt -->
+      <!-- Sökfält för filmer/serier -->
+      <input type="text" id="searchInput" placeholder="Search for movies or series..." autofocus>
     </div>
-    <button id="searchBtn">Search</button>   <!-- Knapp för att starta sökningen -->
+    <!-- Sökknapp -->
+    <button id="searchBtn">Search</button>
   </div>
 </header>
 
 <main>
-  <section id="movieList" class="movie-grid"></section>   <!-- Sektion där sökresultaten kommer visas dynamiskt via JavaScript -->
+  <!-- Sektion för att visa sökresultat som ett rutnät med filmer -->
+  <section id="movieList" class="movie-grid"></section>
 </main>
 
 <footer>
-  <p>2025 Movie Browser — Powered by OMDb.</p>   <!-- Sidfot med information om sidan och API som används-->
+  <p>2025 Movie Browser — Powered by OMDb.</p>
+  <!--
+    Footer används för att ge sidans avslutande information.
+    Ger ett professionellt intryck, som på vanliga webbplatser.
+  -->
 </footer>
 
 <script src="js/app.js"></script>
